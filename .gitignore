@@ -2,3 +2,4 @@
 
 # Compiled output
 /node_modules
+.env

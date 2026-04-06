@@ -24,6 +24,12 @@ exports.toggleBook = async (id) => {
   return await bookModel.toggleAvailability(id, !book.available);
 };
 
+exports.findByName = async (title) => {
+
+   const book = await bookModel.search(term);
+   return boot != null ? rows[0] : null;
+  }
+
 exports.searchBooks = async (term) => {
   return await bookModel.search(term);
 };

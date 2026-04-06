@@ -1,4 +1,7 @@
 const authService = require("../services/authService");
+const userService = require('../services/userService');
+const jwt = require('jsonwebtoken');
+const { FRONTEND_URL, JWT_SECRET } = require('../config/constants');
 
 exports.register = async (req, res) => {
   try {
@@ -31,4 +34,25 @@ exports.login = async (req, res) => {
 
     res.status(500).json({ msg: "Login error" });
   }
+};
+
+exports.socialLoginCallback = (req, res) => {
+    try {
+        // the user was already processed by passport.js 
+        const user = req.user;
+
+        // we need  to create a token
+        const token = jwt.sign(
+            { id: user.id, email: user.email, role: user.role },
+            JWT_SECRET,
+            { expiresIn: '24h' }
+        );
+
+       
+        res.redirect(`${FRONTEND_URL}/?token=${token}`);
+        
+    } catch (error) {
+        console.error("Error en callback social:", error);
+        res.redirect(`${FRONTEND_URL}/login?error=sso_failed`);
+    }
 };

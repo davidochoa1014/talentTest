@@ -34,8 +34,8 @@ exports.findById = (id) => {
 exports.update = (id, book) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "UPDATE books SET title=?, author=?, description=? WHERE id=?",
-      [book.title, book.author, book.description, id],
+      "UPDATE books SET title=?, author=?, description=?,  available = ?, year = ?, daily_price = ? WHERE id=?",
+      [book.title, book.author, book.description, book.available, book.year, book.daily_price, id],
       (err, result) => {
         if (err) return reject(err);
         resolve(result);
