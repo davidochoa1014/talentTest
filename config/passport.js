@@ -7,7 +7,7 @@ const userService = require('../services/userService');
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-    callbackURL: "http://localhost:3001/api/auth/google/callback",
+    callbackURL: "http://46.202.89.105.sslip.io:3001/api/auth/google/callback",
     proxy: true 
   },
   async (accessToken, refreshToken, profile, done) => {
@@ -31,7 +31,7 @@ passport.use(new GoogleStrategy({
 passport.use(new MicrosoftStrategy({
     clientID: process.env.AZURE_CLIENT_ID,
     clientSecret: process.env.AZURE_CLIENT_ID,
-    callbackURL: "http://localhost:3001/api/auth/azure/callback",
+    callbackURL: "https://46.202.89.105.sslip.io:3001/api/auth/azure/callback",
     scope: ['user.read'],
     tenant: 'common',
     pkce: true,
